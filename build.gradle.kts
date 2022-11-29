@@ -30,6 +30,20 @@ dependencies {
     // Important note: kotlin-logging depends on slf4j-api (in the JVM artifact).
     //                 In runtime, it is also required to depend on a logging implementation
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.0")
+
+    implementation("commons-io:commons-io:2.11.0")
+
+    // zip
+    implementation("org.apache.commons:commons-compress:1.21")
+    implementation("org.tukaani:xz:1.9")
+
+    implementation("org.zeroturnaround:zt-zip:1.15")
+
+    // https://mvnrepository.com/artifact/org.codehaus.jettison/jettison
+    implementation("org.codehaus.jettison:jettison:1.5.1")
+    implementation("com.google.code.gson:gson:2.10")
+
+    implementation("com.fasterxml.uuid:java-uuid-generator:4.0.1")
 }
 
 tasks.getByName<Test>("test") {
