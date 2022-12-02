@@ -1,13 +1,6 @@
 package ocr
 
 import mu.KotlinLogging
-import org.apache.commons.io.FileUtils
-import org.apache.commons.io.filefilter.FileFilterUtils
-import org.apache.commons.io.filefilter.TrueFileFilter
-import utils.BBoxUtil
-import utils.FileUtil
-import utils.JsonUtil
-import java.io.File
 
 private val log = KotlinLogging.logger { }
 
@@ -93,10 +86,26 @@ fun main() {
 
     // rename: json file, image , jsonObject -> identifier
 
-    val jsonFiles = FileUtils.listFiles(File("F:\\ww"), FileFilterUtils.suffixFileFilter("json"), TrueFileFilter.TRUE)
-    jsonFiles.forEach {
-//        ocrObject = JsonUtil.getNewJSONObject(File(it.parent, "${it.nameWithoutExtension}.png"), ocrObject)
-//        ocrObject.getJSONObject("Images").put("identifier", it.nameWithoutExtension)
-//        FileUtil.writeJsonFile(it, ocrObject)
-    }
+//    val filenames =
+//        FileUtil.readAllLines(File("C:\\Users\\Administrator\\Desktop\\caffe-label\\ocr\\작업\\K_T 포함된 json 파일명들.txt"))
+//
+//    val groups = FileUtils.listFiles(File("F:\\new"), TrueFileFilter.TRUE, TrueFileFilter.TRUE)
+//        .groupBy { it.nameWithoutExtension }
+//
+//    val destination = File("F:\\ww")
+//
+//    for ((index, key) in groups.keys.withIndex()) {
+//        val group = groups[key]!!
+//        val filename = filenames[index]
+//        group.forEach {
+//            if (it.extension == "json") {
+//                var ocrObject = FileUtil.readJsonFile(it)
+//                ocrObject = JsonUtil.getNewJSONObject(File(it.parent, "${it.nameWithoutExtension}.png"), ocrObject)
+//                ocrObject.getJSONObject("Images").put("identifier", File(filename).nameWithoutExtension)
+//                FileUtil.writeJsonFile(File(destination, "${File(filename).nameWithoutExtension}.json"), ocrObject)
+//            } else {
+//                FileUtils.moveFile(it, File(destination, "${File(filename).nameWithoutExtension}.png"))
+//            }
+//        }
+//    }
 }
