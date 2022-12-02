@@ -30,6 +30,17 @@ dependencies {
     // Important note: kotlin-logging depends on slf4j-api (in the JVM artifact).
     //                 In runtime, it is also required to depend on a logging implementation
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.0")
+
+
+    { // Excel Util
+        implementation("org.apache.commons:commons-collections4:4.4")
+        implementation("org.apache.poi:poi:5.2.3")
+        implementation("org.apache.poi:poi-ooxml:5.2.3")
+        implementation("org.apache.poi:poi-ooxml-lite:5.2.3")
+        implementation("org.apache.xmlbeans:xmlbeans:5.1.1")
+        implementation("org.apache.logging.log4j:log4j-api:2.19.0")
+        implementation("org.apache.logging.log4j:log4j-core:2.19.0")
+    }
 }
 
 tasks.getByName<Test>("test") {
