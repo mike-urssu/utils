@@ -26,7 +26,7 @@ dependencies {
     implementation("ch.qos.logback:logback-core:1.4.5")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
 
-    // Excel Util
+    // excel
     implementation("org.apache.commons:commons-collections4:4.4")
     implementation("org.apache.poi:poi:5.2.3")
     implementation("org.apache.poi:poi-ooxml:5.2.3")
@@ -34,6 +34,11 @@ dependencies {
     implementation("org.apache.xmlbeans:xmlbeans:5.1.1")
     implementation("org.apache.logging.log4j:log4j-api:2.19.0")
     implementation("org.apache.logging.log4j:log4j-core:2.19.0")
+
+    // pdf
+    implementation("org.apache.pdfbox:pdfbox:2.0.27")
+    implementation("org.apache.pdfbox:pdfbox-tools:2.0.27")
+    implementation("commons-logging:commons-logging:1.2")
 }
 
 tasks.getByName<Test>("test") {
