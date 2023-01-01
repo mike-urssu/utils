@@ -39,9 +39,9 @@ dependencies {
 
     implementation("org.zeroturnaround:zt-zip:1.15")
 
-    // https://mvnrepository.com/artifact/org.codehaus.jettison/jettison
-    implementation("org.codehaus.jettison:jettison:1.5.2")
+    implementation("org.codehaus.jettison:jettison:1.5.3")
     implementation("com.google.code.gson:gson:2.10")
+    implementation("org.json:json:20220924")
 
     implementation("com.fasterxml.uuid:java-uuid-generator:4.0.1")
 }

@@ -55,9 +55,17 @@ object FileUtil {
     }
 
     fun writeJsonFile(jsonFile: File, ocrObject: JSONObject) {
-        BufferedWriter(FileWriter(jsonFile)).use {
+        BufferedWriter(FileWriter(jsonFile)).use { writer ->
             val content = JsonUtil.jsonToFormattedString(ocrObject)
-            it.write(JsonUtil.alignOcrObject(content))
+            writer.write(JsonUtil.alignOcrObject(content))
+            writer.flush()
+        }
+    }
+
+    fun writeFilenames(file: File, filenames: Collection<String>) {
+        BufferedWriter(FileWriter(file)).use { writer ->
+            filenames.forEach { writer.write("${it}\n") }
+            writer.flush()
         }
     }
 }

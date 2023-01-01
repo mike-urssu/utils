@@ -7,9 +7,13 @@ import mu.KotlinLogging
 import org.codehaus.jettison.json.JSONArray
 import org.codehaus.jettison.json.JSONObject
 import java.io.File
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 object JsonUtil {
     private val log = KotlinLogging.logger { }
+
+    private val dateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd")
 
     private val gson = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
 
@@ -22,23 +26,23 @@ object JsonUtil {
         this.put("type", 1)
     }
 
-    fun parseLabelData(image: File, labelData: JSONArray): JSONObject {
-        // here
-        val bboxes = getBBoxes(image, labelData)
-
-        val ocrObject = JSONObject()
-        ocrObject.put("Annotation", getAnnotation(bboxes))
-        ocrObject.put("DataSet", dataSet)
-        ocrObject.put("Images", getImages(image))
-        ocrObject.put("bbox", bboxes)
-        return ocrObject
-    }
+//    fun parseLabelData(image: File, labelData: JSONArray): JSONObject {
+//        // here
+//        val bboxes = getBBoxes(image, labelData)
+//
+//        val ocrObject = JSONObject()
+//        ocrObject.put("Annotation", getAnnotation(bboxes))
+//        ocrObject.put("DataSet", dataSet)
+//        ocrObject.put("Images", getImages(image))
+//        ocrObject.put("bbox", bboxes)
+//        return ocrObject
+//    }
 
     fun getNewJSONObject(image: File, previousPreLabelData: JSONObject): JSONObject {
         val newJSONObject = JSONObject()
         newJSONObject.put("Annotation", getAnnotation(previousPreLabelData.getJSONArray("bbox")))
         newJSONObject.put("DataSet", dataSet)
-        newJSONObject.put("Images", getImages(image))
+        newJSONObject.put("Images", getImages(image, previousPreLabelData.getJSONObject("Images")))
         newJSONObject.put("bbox", getBBoxes(previousPreLabelData.getJSONArray("bbox")))
         return newJSONObject
     }
@@ -53,9 +57,15 @@ object JsonUtil {
             }
         }
 
-    private fun getImages(image: File) =
+    private fun getImages(image: File, images: JSONObject) =
         JSONObject().run {
-            this.put("data_captured", "2022.11.29")
+            if (images.has("data_capture")) {
+                this.put("data_captured", images["data_capture"])
+            } else if (images.has("data_captured")) {
+                this.put("data_captured", images["data_captured"])
+            } else {
+                this.put("data_captured", LocalDate.now().format(dateFormat))
+            }
             if (image.name.contains("BL")) {
                 this.put("form_type", "선하증권")
             } else if (image.name.contains("NV")) {
