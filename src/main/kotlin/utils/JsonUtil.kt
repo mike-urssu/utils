@@ -81,7 +81,7 @@ object JsonUtil {
             val imageSize = ImageUtil.getImageSize(image)
             this.put("height", imageSize[1])
             this.put("identifier", image.nameWithoutExtension)
-            this.put("type", "png")
+            this.put("type", image.extension)
             this.put("width", imageSize[0])
         }
 

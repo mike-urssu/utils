@@ -1,5 +1,6 @@
 package ocr
 
+import mu.KotlinLogging
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.filefilter.TrueFileFilter
 import utils.FileUtil
@@ -14,8 +15,10 @@ private val totalSizes = intArrayOf(25000, 10000, 15000, 25000, 25000)
 private const val source = "D:\\ocr 작업\\test\\ocr 납품용 데이터"
 private const val destination = "D:\\ocr 작업\\test\\납품용"
 
+private val log = KotlinLogging.logger { }
+
 fun main() {
-    repeat(1) { i ->
+    repeat(5) { i ->
         val parent = parents[i]
         val groups = getGroups(parent, totalSizes[i])
         val logs = logFilenames(parent, groups.keys.shuffled())
@@ -86,6 +89,8 @@ private fun reformatJsonFiles(parent: String) {
     FileUtils.listFiles(File(destination, parent), TrueFileFilter.TRUE, TrueFileFilter.TRUE)
         .groupBy { it.nameWithoutExtension }
         .forEach { group ->
+            log.info { group.key }
+
             val jsonFile = group.value.find { it.extension == "json" }!!
             val image = group.value.find { it.extension != "json" }!!
             val content = FileUtil.readJsonFile(jsonFile)
